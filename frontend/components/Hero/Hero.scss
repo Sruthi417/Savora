@@ -1,0 +1,915 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+.hero {
+  --orange: #ff5200;
+  --text: #171717;
+  --muted: #666666;
+
+  /*
+   * The rings and hero image intentionally bleed below the
+   * visual's own box (see .hero-ring-three / .hero-main-image).
+   * This reserves room for that bleed so it never gets clipped.
+   */
+  --hero-bleed: 25px;
+
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+
+  /* Clip horizontal ring overflow only; never clip vertically. */
+  overflow-x: hidden;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding-bottom: var(--hero-bleed);
+
+  box-sizing: border-box;
+
+  background: linear-gradient(
+    180deg,
+   #ffffff 0%,
+  #ffffff 10%,
+
+  #fffdfb 20%,
+  #fff7f2 25%,
+
+  #fae0d1 40%,
+  #f8cdb9 58%,
+
+  #f8cdb9 68%,
+  #f8cdb9 78%,
+
+  #f8cdb9 86%,
+  #f8cdb9 92%,
+
+  #f8cdb9 100%
+  );
+}
+
+/* =====================================================
+   FULL-WIDTH ORANGE ATMOSPHERE
+===================================================== */
+
+.hero::before {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 0;
+
+  pointer-events: none;
+
+  /*
+   * Adds depth to the orange without creating
+   * a concentrated glow around the image.
+   */
+
+  // background: linear-gradient(
+  //   180deg,
+  //   rgba(255, 82, 0, 0) 28%,
+  //   rgba(255, 82, 0, 0.015) 36%,
+  //   rgba(255, 82, 0, 0.035) 44%,
+  //   rgba(255, 82, 0, 0.065) 52%,
+  //   rgba(255, 82, 0, 0.09) 62%,
+  //   rgba(255, 82, 0, 0.12) 72%,
+  //   rgba(255, 82, 0, 0.15) 84%,
+  //   rgba(255, 82, 0, 0.18) 100%
+  // );
+}
+
+/* =====================================================
+   SOFT WHITE → ORANGE TRANSITION
+===================================================== */
+
+.hero::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 27%;
+
+  height: 30%;
+
+  z-index: 1;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.45) 20%,
+    rgba(255, 248, 244, 0.25) 48%,
+    rgba(255, 237, 228, 0.08) 75%,
+    rgba(255, 230, 218, 0) 100%
+  );
+}
+
+/* =====================================================
+   REMOVE IMAGE GLOW
+===================================================== */
+
+.hero-background-glow,
+.hero-image-glow {
+  display: none;
+}
+
+/* =====================================================
+   HERO CONTENT
+===================================================== */
+
+.hero-content {
+  position: relative;
+
+  z-index: 10;
+
+  width: min(720px, calc(100% - 40px));
+  padding-top: clamp(72px, 9vh, 7rem);
+  margin-top: 5rem;
+
+  text-align: center;
+
+  box-sizing: border-box;
+}
+
+/* =====================================================
+   TITLE
+===================================================== */
+
+.hero-title {
+  max-width: 720px;
+
+  margin: 19px auto 0;
+
+  color: var(--text);
+
+  font-size: clamp(42px, 5.4vw, 56px);
+
+  line-height: 1.1;
+
+  font-weight: 500;
+  font-family: "Manrope", sans-serif;
+  letter-spacing: -0.055em;
+
+  span {
+    display: block;
+  }
+}
+
+/* =====================================================
+   DESCRIPTION
+===================================================== */
+
+.hero-description {
+  max-width: 570px;
+
+  margin: 20px auto 0;
+
+  color: var(--muted);
+
+  font-size: clamp(14px, 1.4vw, 16px);
+
+  line-height: 1.55;
+  font-family: "Manrope", sans-serif;
+}
+
+/* =====================================================
+   HERO CHAT BOX
+===================================================== */
+
+.hero-chat {
+  width: min(580px, calc(100% - 20px));
+  min-height: 98px;
+
+  margin: 28px auto 0;
+  padding: 14px 14px 12px 18px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 20px;
+
+  background: rgba(255, 255, 255, 0.92);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+
+  &:focus-within {
+    border-color: rgba(255, 82, 0, 0.35);
+  }
+}
+
+/* =====================================================
+   TEXT AREA
+===================================================== */
+
+.hero-chat textarea {
+  width: 100%;
+
+  min-height: 44px;
+  max-height: 110px;
+
+  padding: 7px 10px 0 0;
+
+  align-self: flex-start;
+
+  resize: none;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #171717;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+
+  &::placeholder {
+    color: #999999;
+  }
+}
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
+.hero-chat-send {
+  flex-shrink: 0;
+
+  width: 40px;
+  height: 40px;
+
+  align-self: flex-end;
+
+  display: grid;
+  place-items: center;
+
+  margin-top: auto;
+
+  border: none;
+  border-radius: 50%;
+
+  background: var(--orange);
+  color: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    background: #e94a00;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+}
+/* =====================================================
+   HERO VISUAL
+===================================================== */
+
+.hero-visual {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  /* The actual gap between the chat box and the rings/image/cards. */
+  margin-top: clamp(10px, 6vw, 10px);
+
+  display: flex;
+
+  justify-content: center;
+  align-items: flex-end;
+
+  pointer-events: none;
+}
+
+/* =====================================================
+   WHITE CIRCLES / ELLIPTICAL RINGS
+===================================================== */
+
+.hero-ring {
+  position: absolute;
+
+  left: 50%;
+
+  transform: translateX(-50%);
+
+  border: 1px solid rgba(255, 255, 255, 0.68);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+/* -----------------------------------------
+   Ring 1 — inner
+----------------------------------------- */
+
+.hero-ring-one {
+  width: 500px;
+  height: 360px;
+
+  bottom: 140px;
+
+  opacity: 0.9;
+}
+
+/* -----------------------------------------
+   Ring 2 — middle
+----------------------------------------- */
+
+.hero-ring-two {
+  width: 700px;
+  height: 520px;
+
+  bottom: 50px;
+
+  opacity: 0.68;
+}
+
+/* -----------------------------------------
+   Ring 3 — outer
+----------------------------------------- */
+
+// .hero-ring-three {
+//   width: 900px;
+//   height: 680px;
+
+//   bottom: -100px;
+
+//   opacity: 0.45;
+// }
+
+/* =====================================================
+   MAIN IMAGE
+===================================================== */
+
+.hero-main-image {
+  position: relative;
+
+  z-index: 3;
+
+  width: 500px;
+  height: 500px;
+
+  overflow: visible;
+  bottom: 50px;
+
+  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.12));
+
+  pointer-events: auto;
+}
+
+.hero-main-image img {
+  object-fit: contain;
+}
+
+/* =====================================================
+   FLOATING CARDS
+===================================================== */
+
+.hero-cards {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 5;
+
+  pointer-events: none;
+}
+
+.hero-card {
+  position: absolute;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 15px 17px;
+
+  border: 1px solid rgba(255, 255, 255, 0.9);
+
+  border-radius: 16px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow:
+    0 18px 40px rgba(0, 0, 0, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  pointer-events: auto;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.hero-card:hover {
+  box-shadow:
+    0 25px 50px rgba(0, 0, 0, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* =====================================================
+   CARD ICON
+===================================================== */
+
+.hero-card-icon {
+  flex-shrink: 0;
+
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+
+  place-items: center;
+
+  border-radius: 10px;
+
+  background: rgba(255, 82, 0, 0.09);
+
+  color: var(--orange);
+}
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.hero-card-content {
+  h2 {
+    margin: 1px 0 0;
+
+    color: #202020;
+
+    font-size: 13px;
+
+    line-height: 1.25;
+
+    font-weight: 700;
+    font-family: "Manrope", sans-serif;
+  }
+
+  p {
+    max-width: 200px;
+
+    margin: 5px 0 0;
+
+    color: #737373;
+
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+
+    line-height: 1.45;
+  }
+}
+
+/* =====================================================
+   BUDGET CARD
+===================================================== */
+
+.budget-card {
+  width: 225px;
+
+  left: calc(50% - 480px);
+
+  top: 25%;
+
+  transform: rotate(-9deg);
+}
+
+/* =====================================================
+   NUTRITION CARD
+===================================================== */
+
+.nutrition-card {
+  width: 250px;
+
+  right: calc(50% - 520px);
+
+  top: 20%;
+
+  transform: rotate(13deg);
+}
+
+/* =====================================================
+   CRAVING CARD
+===================================================== */
+
+.craving-card {
+  width: 255px;
+
+  left: calc(50% - 460px);
+
+  /*
+   * Leaves orange space below card.
+   */
+
+  bottom: 15%;
+
+  transform: rotate(8deg);
+}
+
+/* =====================================================
+   PANTRY CARD
+===================================================== */
+
+.pantry-card {
+  width: 240px;
+
+  right: calc(50% - 450px);
+
+  /*
+   * Leaves orange space below card.
+   */
+
+  bottom: 15%;
+
+  transform: rotate(-5deg);
+}
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1100px) {
+  .hero-content {
+    padding-top: 85px;
+  }
+
+  .hero-title {
+    font-size: clamp(42px, 6vw, 64px);
+  }
+
+  .hero-main-image {
+    width: 350px;
+    height: 350px;
+
+    margin-bottom: 20px;
+  }
+
+  .budget-card {
+    width: 215px;
+
+    left: 4%;
+
+    top: 24%;
+  }
+
+  .nutrition-card {
+    width: 230px;
+
+    right: 4%;
+
+    top: 14%;
+  }
+
+  .craving-card {
+    width: 230px;
+
+    left: 7%;
+
+    bottom: 15%;
+  }
+
+  .pantry-card {
+    width: 215px;
+
+    right: 7%;
+
+    bottom: 18%;
+  }
+
+  .hero-card-content {
+    h2 {
+      font-size: 10px;
+    }
+
+    p {
+      font-size: 8px;
+    }
+  }
+
+  .hero-ring-one {
+    width: 500px;
+  }
+
+  .hero-ring-two {
+    width: 700px;
+  }
+
+  .hero-ring-three {
+    width: 880px;
+  }
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+  .hero {
+    min-height: 600px;
+
+    /* Ring bleed is smaller on mobile (see .hero-ring-three below). */
+    --hero-bleed: 220px;
+
+    /*
+     * 70% orange treatment on mobile too.
+     */
+
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #ffffff 30%,
+
+      #fffefd 37%,
+      #fffaf7 44%,
+
+      #fff4ee 51%,
+      #ffede5 59%,
+
+      #ffe7dc 68%,
+      #ffe0d2 77%,
+
+      #ffd9c9 88%,
+      #ffd2be 100%
+    );
+  }
+
+  .hero::before {
+    top: 28%;
+
+    background: linear-gradient(
+      180deg,
+      rgba(255, 82, 0, 0) 25%,
+      rgba(255, 82, 0, 0.02) 38%,
+      rgba(255, 82, 0, 0.045) 50%,
+      rgba(255, 82, 0, 0.075) 65%,
+      rgba(255, 82, 0, 0.12) 82%,
+      rgba(255, 82, 0, 0.16) 100%
+    );
+  }
+
+  .hero-content {
+    width: calc(100% - 30px);
+
+    padding-top: 72px;
+  }
+
+  .hero-eyebrow {
+    padding: 6px 10px 6px 8px;
+
+    font-size: 9px;
+  }
+
+  .hero-title {
+    margin-top: 16px;
+
+    font-size: clamp(37px, 10.5vw, 48px);
+
+    line-height: 1;
+  }
+
+  .hero-description {
+    max-width: 330px;
+
+    margin-top: 17px;
+
+    font-size: 12px;
+  }
+
+  .hero-button {
+    margin-top: 21px;
+  }
+
+  /* =============================================
+     IMAGE
+  ============================================= */
+
+  .hero-main-image {
+    width: 245px;
+    height: 245px;
+
+    margin-bottom: 20px;
+  }
+
+  /* =============================================
+     RINGS
+  ============================================= */
+
+  .hero-ring-one {
+    width: 370px;
+    height: 220px;
+
+    bottom: -90px;
+  }
+
+  .hero-ring-two {
+    width: 520px;
+    height: 300px;
+
+    bottom: -135px;
+  }
+
+  .hero-ring-three {
+    width: 680px;
+    height: 390px;
+
+    bottom: -185px;
+  }
+
+  /* =============================================
+     CARDS
+  ============================================= */
+
+  .hero-card {
+    padding: 9px;
+
+    gap: 7px;
+
+    border-radius: 12px;
+  }
+
+  .hero-card-icon {
+    width: 26px;
+    height: 26px;
+
+    border-radius: 7px;
+
+    svg {
+      width: 13px;
+      height: 13px;
+    }
+  }
+
+  .hero-card-content {
+    h2 {
+      font-size: 8px;
+    }
+
+    p {
+      max-width: 130px;
+
+      margin-top: 3px;
+
+      font-size: 6px;
+
+      line-height: 1.35;
+    }
+  }
+
+  /* =============================================
+     MOBILE CARD POSITIONS
+  ============================================= */
+
+  .budget-card {
+    width: 150px;
+
+    left: 3px;
+
+    top: 22%;
+
+    transform: rotate(-8deg);
+  }
+
+  .nutrition-card {
+    width: 160px;
+
+    right: 2px;
+
+    top: 10%;
+
+    transform: rotate(7deg);
+  }
+
+  .craving-card {
+    width: 160px;
+
+    left: 3px;
+
+    /*
+     * Orange space below.
+     */
+
+    bottom: 17%;
+
+    transform: rotate(6deg);
+  }
+
+  .pantry-card {
+    width: 150px;
+
+    right: 2px;
+
+    /*
+     * Orange space below.
+     */
+
+    bottom: 20%;
+
+    transform: rotate(-7deg);
+  }
+}
+
+/* =====================================================
+   VERY SMALL MOBILE
+===================================================== */
+
+@media (max-width: 400px) {
+  .hero-content {
+    width: calc(100% - 24px);
+
+    padding-top: 65px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .hero-description {
+    max-width: 300px;
+
+    font-size: 11px;
+  }
+
+  .hero-main-image {
+    width: 215px;
+    height: 215px;
+
+    margin-bottom: 18px;
+  }
+
+  .hero-ring-one {
+    width: 340px;
+  }
+
+  .hero-ring-two {
+    width: 480px;
+  }
+
+  .hero-ring-three {
+    width: 620px;
+  }
+
+  .hero-card {
+    padding: 8px;
+  }
+
+  .budget-card {
+    width: 135px;
+  }
+
+  .nutrition-card {
+    width: 145px;
+  }
+
+  .craving-card {
+    width: 145px;
+
+    bottom: 17%;
+  }
+
+  .pantry-card {
+    width: 135px;
+
+    bottom: 20%;
+  }
+
+  .hero-card-content {
+    h2 {
+      font-size: 7.5px;
+    }
+
+    p {
+      font-size: 5.7px;
+    }
+  }
+}
