@@ -17,5 +17,6 @@ export const {
   GOOGLE_CALLBACK_URL,
   GEMINI_TITLE_API_KEY,
   GEMINI_CHAT_API_KEY,
-  APIFY_API_TOKEN,
+  GEMINI_API_KEY,
+
 } = process.env;

@@ -1,8 +1,8 @@
 import { GoogleGenAI } from "@google/genai";
-import { GEMINI_CHAT_API_KEY } from "../config/env.js";
+import { GEMINI_CHAT_API_KEY, GEMINI_API_KEY} from "../config/env.js";
 
 const ai = new GoogleGenAI({
-  apiKey: GEMINI_CHAT_API_KEY,
+  apiKey: GEMINI_API_KEY,
 });
 
 const generateAIResponse = async (messages, location = null) => {
@@ -47,7 +47,7 @@ Do not assume the user's location.
 `;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
 
       contents,
 
