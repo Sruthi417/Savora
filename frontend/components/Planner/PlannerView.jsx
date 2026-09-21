@@ -15,7 +15,7 @@ export default function PlannerView({ conversationId = null }) {
   // --------------------------------
   const handleConversationSelect = (newConversationId) => {
     router.push(
-      newConversationId ? `/planner/${newConversationId}` : "/planner",
+      newConversationId ? `/planner/${newConversationId}` : "/planner"
     );
   };
 
@@ -30,8 +30,12 @@ export default function PlannerView({ conversationId = null }) {
   return (
     <main className="planner">
 
-      
-   
+      <header className="planner-header">
+        <div className="brand">
+          <span className="brand-name">Savora</span>
+          <span className="brand-assistant">AI Assistant</span>
+        </div>
+      </header>
 
       <Sidebar
         ref={sidebarRef}
