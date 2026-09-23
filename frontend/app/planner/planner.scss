@@ -13,11 +13,22 @@
     #fff8f2,
     #ffe9d8
   );
+
+  // background: linear-gradient(
+  //   135deg,
+  //   rgba(255, 248, 242, 0.55),
+  //   rgba(255, 233, 216, 0.45)
+  // );
+
+  // backdrop-filter: blur(30px) saturate(140%);
+  // -webkit-backdrop-filter: blur(30px) saturate(140%);
+
+  // border: 1px solid rgba(255, 255, 255, 0.5);
+
+  // box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 
-// Sits in the space already reserved above the sidebar/main
-// window by their own padding/margin — doesn't shift either.
 .planner-header {
   position: absolute;
 
@@ -57,8 +68,6 @@
   font-weight: 500;
   color: #555;
 }
-
-
 
 .planner__main {
   flex: 1;

@@ -1,15 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
 .hero {
-  --orange: #ff5200;
+  // --orange: #ff5200;
+   --orange: #ffffff;
   --text: #171717;
   --muted: #666666;
 
-  /*
-   * The rings and hero image intentionally bleed below the
-   * visual's own box (see .hero-ring-three / .hero-main-image).
-   * This reserves room for that bleed so it never gets clipped.
-   */
+ 
   --hero-bleed: 25px;
 
   position: relative;
@@ -27,30 +24,60 @@
 
   box-sizing: border-box;
 
-  background: linear-gradient(
-    180deg,
-   #ffffff 0%,
-  #ffffff 10%,
+  // background: linear-gradient(
+  //   180deg,
+  //  #ffffff 0%,
+  // #ffffff 10%,
 
-  #fffdfb 20%,
-  #fff7f2 25%,
+  // #fffdfb 20%,
+  // #fff7f2 25%,
 
-  #fae0d1 40%,
-  #f8cdb9 58%,
+  // #fae0d1 40%,
+  // #f8cdb9 58%,
 
-  #f8cdb9 68%,
-  #f8cdb9 78%,
+  // #f8cdb9 68%,
+  // #f8cdb9 78%,
 
-  #f8cdb9 86%,
-  #f8cdb9 92%,
+  // #f8cdb9 86%,
+  // #f8cdb9 92%,
 
-  #f8cdb9 100%
-  );
+  // #f8cdb9 100%
+  // );
+
+  
 }
 
 /* =====================================================
    FULL-WIDTH ORANGE ATMOSPHERE
 ===================================================== */
+
+// .hero::before {
+//   content: "";
+
+//   position: absolute;
+//   inset: 0;
+
+//   z-index: 0;
+
+//   pointer-events: none;
+
+//   /*
+//    * Adds depth to the orange without creating
+//    * a concentrated glow around the image.
+//    */
+
+//   // background: linear-gradient(
+//   //   180deg,
+//   //   rgba(255, 82, 0, 0) 28%,
+//   //   rgba(255, 82, 0, 0.015) 36%,
+//   //   rgba(255, 82, 0, 0.035) 44%,
+//   //   rgba(255, 82, 0, 0.065) 52%,
+//   //   rgba(255, 82, 0, 0.09) 62%,
+//   //   rgba(255, 82, 0, 0.12) 72%,
+//   //   rgba(255, 82, 0, 0.15) 84%,
+//   //   rgba(255, 82, 0, 0.18) 100%
+//   // );
+// }
 
 .hero::before {
   content: "";
@@ -59,55 +86,45 @@
   inset: 0;
 
   z-index: 0;
-
   pointer-events: none;
 
-  /*
-   * Adds depth to the orange without creating
-   * a concentrated glow around the image.
-   */
+  background-image: radial-gradient(
+    circle,
+      rgba(239, 166, 92, 0.6) 1px,
+    transparent 1px
+  );
 
-  // background: linear-gradient(
-  //   180deg,
-  //   rgba(255, 82, 0, 0) 28%,
-  //   rgba(255, 82, 0, 0.015) 36%,
-  //   rgba(255, 82, 0, 0.035) 44%,
-  //   rgba(255, 82, 0, 0.065) 52%,
-  //   rgba(255, 82, 0, 0.09) 62%,
-  //   rgba(255, 82, 0, 0.12) 72%,
-  //   rgba(255, 82, 0, 0.15) 84%,
-  //   rgba(255, 82, 0, 0.18) 100%
-  // );
+  background-size: 25px 25px;
 }
 
 /* =====================================================
    SOFT WHITE → ORANGE TRANSITION
 ===================================================== */
 
-.hero::after {
-  content: "";
+// .hero::after {
+//   content: "";
 
-  position: absolute;
+//   position: absolute;
 
-  left: 0;
-  right: 0;
-  top: 27%;
+//   left: 0;
+//   right: 0;
+//   top: 27%;
 
-  height: 30%;
+//   height: 30%;
 
-  z-index: 1;
+//   z-index: 1;
 
-  pointer-events: none;
+//   pointer-events: none;
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.45) 20%,
-    rgba(255, 248, 244, 0.25) 48%,
-    rgba(255, 237, 228, 0.08) 75%,
-    rgba(255, 230, 218, 0) 100%
-  );
-}
+//   // background: linear-gradient(
+//   //   180deg,
+//   //   rgba(255, 255, 255, 0) 0%,
+//   //   rgba(255, 255, 255, 0.45) 20%,
+//   //   rgba(255, 248, 244, 0.25) 48%,
+//   //   rgba(255, 237, 228, 0.08) 75%,
+//   //   rgba(255, 230, 218, 0) 100%
+//   // );
+// }
 
 /* =====================================================
    REMOVE IMAGE GLOW
@@ -125,11 +142,11 @@
 .hero-content {
   position: relative;
 
-  z-index: 10;
+  z-index: 1000;
 
   width: min(720px, calc(100% - 40px));
-  padding-top: clamp(72px, 9vh, 7rem);
-  margin-top: 5rem;
+  padding-top: clamp(72px, 9vh, 6rem);
+  margin-top: 4rem;
 
   text-align: center;
 
@@ -147,7 +164,7 @@
 
   color: var(--text);
 
-  font-size: clamp(42px, 5.4vw, 56px);
+  font-size: clamp(42px, 5.4vw, 60px);
 
   line-height: 1.1;
 
@@ -156,7 +173,41 @@
   letter-spacing: -0.055em;
 
   span {
+    position: relative;
+
     display: block;
+
+    width: max-content;
+
+    max-width: 100%;
+
+    margin: 0 auto;
+
+    z-index: 1;
+
+    // Orange line
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+
+      top: 58%;
+
+      height: 30px;
+
+      background: rgba(250, 130, 10, 0.40);
+
+      border-radius: 2px;
+
+      transform: rotate(-1deg);
+
+      z-index: -1;
+
+      pointer-events: none;
+    }
   }
 }
 
@@ -262,7 +313,7 @@
 
   background: var(--orange);
   color: #ffffff;
-
+background: #e35c1e;
   cursor: pointer;
 
   transition:
@@ -272,7 +323,7 @@
 
   &:hover:not(:disabled) {
     transform: translateY(-2px);
-    background: #e94a00;
+    background: #e78558;
   }
 
   &:active:not(:disabled) {
@@ -310,58 +361,58 @@
    WHITE CIRCLES / ELLIPTICAL RINGS
 ===================================================== */
 
-.hero-ring {
-  position: absolute;
+// .hero-ring {
+//   position: absolute;
 
-  left: 50%;
+//   left: 50%;
 
-  transform: translateX(-50%);
+//   transform: translateX(-50%);
 
-  border: 1px solid rgba(255, 255, 255, 0.68);
+//   border: 1px solid rgba(255, 255, 255, 0.68);
 
-  border-radius: 50%;
+//   border-radius: 50%;
 
-  pointer-events: none;
-}
-
-/* -----------------------------------------
-   Ring 1 — inner
------------------------------------------ */
-
-.hero-ring-one {
-  width: 500px;
-  height: 360px;
-
-  bottom: 140px;
-
-  opacity: 0.9;
-}
-
-/* -----------------------------------------
-   Ring 2 — middle
------------------------------------------ */
-
-.hero-ring-two {
-  width: 700px;
-  height: 520px;
-
-  bottom: 50px;
-
-  opacity: 0.68;
-}
-
-/* -----------------------------------------
-   Ring 3 — outer
------------------------------------------ */
-
-// .hero-ring-three {
-//   width: 900px;
-//   height: 680px;
-
-//   bottom: -100px;
-
-//   opacity: 0.45;
+//   pointer-events: none;
 // }
+
+// /* -----------------------------------------
+//    Ring 1 — inner
+// ----------------------------------------- */
+
+// .hero-ring-one {
+//   width: 500px;
+//   height: 360px;
+
+//   bottom: 140px;
+
+//   opacity: 0.9;
+// }
+
+// /* -----------------------------------------
+//    Ring 2 — middle
+// ----------------------------------------- */
+
+// .hero-ring-two {
+//   width: 700px;
+//   height: 520px;
+
+//   bottom: 50px;
+
+//   opacity: 0.68;
+// }
+
+// /* -----------------------------------------
+//    Ring 3 — outer
+// ----------------------------------------- */
+
+// // .hero-ring-three {
+// //   width: 900px;
+// //   height: 680px;
+
+// //   bottom: -100px;
+
+// //   opacity: 0.45;
+// // }
 
 /* =====================================================
    MAIN IMAGE
@@ -372,13 +423,13 @@
 
   z-index: 3;
 
-  width: 500px;
-  height: 500px;
+  width: 400px;
+  height: 400px;
 
   overflow: visible;
-  bottom: 50px;
+  bottom: 30px;
 
-  filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.12));
+  // filter: drop-shadow(0 0 35px rgba(0, 0, 0, 0.2));
 
   pointer-events: auto;
 }
@@ -391,39 +442,62 @@
    FLOATING CARDS
 ===================================================== */
 
-.hero-cards {
-  position: absolute;
+// .hero-cards {
+//   position: absolute;
 
-  inset: 0;
+//   inset: 0;
 
-  z-index: 5;
+//   z-index: 5;
 
-  pointer-events: none;
-}
+//   pointer-events: none;
+// }
+
+// .hero-card {
+//   position: absolute;
+
+//   display: flex;
+
+//   align-items: flex-start;
+
+//   gap: 10px;
+
+//   padding: 15px 17px;
+
+//   border: 1px solid rgba(255, 255, 255, 0.9);
+
+//   border-radius: 16px;
+
+//   background: rgba(255, 255, 255, 0.88);
+
+//   box-shadow:
+//     0 18px 40px rgba(0, 0, 0, 0.07),
+//     inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+//   backdrop-filter: blur(14px);
+//   -webkit-backdrop-filter: blur(14px);
+
+//   pointer-events: auto;
+
+//   transition:
+//     transform 0.25s ease,
+//     box-shadow 0.25s ease;
+// }
+
+// .hero-card:hover {
+//   box-shadow:
+//     0 25px 50px rgba(0, 0, 0, 0.11),
+//     inset 0 1px 0 rgba(255, 255, 255, 0.95);
+// }
 
 .hero-card {
   position: absolute;
 
-  display: flex;
+  display: block;
 
-  align-items: flex-start;
-
-  gap: 10px;
-
-  padding: 15px 17px;
-
-  border: 1px solid rgba(255, 255, 255, 0.9);
-
-  border-radius: 16px;
-
-  background: rgba(255, 255, 255, 0.88);
-
-  box-shadow:
-    0 18px 40px rgba(0, 0, 0, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  padding: 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
 
   pointer-events: auto;
 
@@ -432,72 +506,72 @@
     box-shadow 0.25s ease;
 }
 
-.hero-card:hover {
-  box-shadow:
-    0 25px 50px rgba(0, 0, 0, 0.11),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+.hero-card-image {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
 }
 
 /* =====================================================
    CARD ICON
 ===================================================== */
 
-.hero-card-icon {
-  flex-shrink: 0;
+// .hero-card-icon {
+//   flex-shrink: 0;
 
-  width: 34px;
-  height: 34px;
+//   width: 34px;
+//   height: 34px;
 
-  display: grid;
+//   display: grid;
 
-  place-items: center;
+//   place-items: center;
 
-  border-radius: 10px;
+//   border-radius: 10px;
 
-  background: rgba(255, 82, 0, 0.09);
+//   background: rgba(255, 82, 0, 0.09);
 
-  color: var(--orange);
-}
+//   color: var(--orange);
+// }
 
-/* =====================================================
-   CARD CONTENT
-===================================================== */
+// /* =====================================================
+//    CARD CONTENT
+// ===================================================== */
 
-.hero-card-content {
-  h2 {
-    margin: 1px 0 0;
+// .hero-card-content {
+//   h2 {
+//     margin: 1px 0 0;
 
-    color: #202020;
+//     color: #202020;
 
-    font-size: 13px;
+//     font-size: 13px;
 
-    line-height: 1.25;
+//     line-height: 1.25;
 
-    font-weight: 700;
-    font-family: "Manrope", sans-serif;
-  }
+//     font-weight: 700;
+//     font-family: "Manrope", sans-serif;
+//   }
 
-  p {
-    max-width: 200px;
+//   p {
+//     max-width: 200px;
 
-    margin: 5px 0 0;
+//     margin: 5px 0 0;
 
-    color: #737373;
+//     color: #737373;
 
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
+//     font-size: 12px;
+//     font-family: "Manrope", sans-serif;
 
-    line-height: 1.45;
-  }
-}
+//     line-height: 1.45;
+//   }
+// }
 
 /* =====================================================
    BUDGET CARD
 ===================================================== */
 
 .budget-card {
-  width: 225px;
-
+  width: 250px;
+    height: 150px;
   left: calc(50% - 480px);
 
   top: 25%;
@@ -511,7 +585,7 @@
 
 .nutrition-card {
   width: 250px;
-
+  height: 175px;
   right: calc(50% - 520px);
 
   top: 20%;
@@ -525,7 +599,7 @@
 
 .craving-card {
   width: 255px;
-
+  height: 135px;
   left: calc(50% - 460px);
 
   /*
@@ -543,7 +617,7 @@
 
 .pantry-card {
   width: 240px;
-
+  height: 135px;
   right: calc(50% - 450px);
 
   /*

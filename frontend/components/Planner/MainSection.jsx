@@ -296,9 +296,9 @@ export default function MainSection({
             <div className="message-row assistant">
               <div className="ai-loading">
 
-                <div className="ai-loading-icon">
+                {/* <div className="ai-loading-icon">
                   <Sparkles size={14} />
-                </div>
+                </div> */}
 
                 <div className="spiral-loader">
                   <span />

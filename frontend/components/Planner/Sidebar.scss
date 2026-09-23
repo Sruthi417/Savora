@@ -114,7 +114,7 @@
 
   background: #202020;
   color: white;
-
+font-family: "Manrope", sans-serif; 
   font-size: 13px;
   font-weight: 500;
 
@@ -156,7 +156,7 @@
   font-weight: 600;
 
   text-transform: uppercase;
-
+font-family: "Manrope", sans-serif; 
   letter-spacing: 0.08em;
 
   color: #999;
@@ -171,6 +171,7 @@
   min-height: 0;
 
   overflow-y: auto;
+  font-family: "Manrope", sans-serif; 
 
   &::-webkit-scrollbar {
     width: 3px;
@@ -204,7 +205,7 @@
   cursor: pointer;
 
   font-size: 13px;
-
+font-family: "Manrope", sans-serif; 
   transition: 0.15s ease;
 
   span {
@@ -244,7 +245,7 @@
 
 .profile-section {
   position: relative;
-
+font-family: "Manrope", sans-serif; 
   margin-top: auto;
 }
 
@@ -314,13 +315,13 @@
   overflow: hidden;
 
   white-space: nowrap;
-
+font-family: "Manrope", sans-serif; 
   text-overflow: ellipsis;
 }
 
 .profile-label {
   font-size: 11px;
-
+font-family: "Manrope", sans-serif; 
   color: #999;
 }
 
@@ -360,6 +361,7 @@
     0 2px 8px rgba(0, 0, 0, 0.04);
 
   backdrop-filter: blur(14px);
+  font-family: "Manrope", sans-serif; 
 }
 
 .dropdown-profile {
@@ -406,6 +408,7 @@
 
 .dropdown-name {
   font-size: 13px;
+  font-family: "Manrope", sans-serif; 
 }
 
 .dropdown-email {
@@ -416,7 +419,7 @@
   white-space: nowrap;
 
   text-overflow: ellipsis;
-
+font-family: "Manrope", sans-serif; 
   font-size: 11px;
 
   color: #999;
@@ -448,7 +451,7 @@
 
   border: none;
   border-radius: 8px;
-
+font-family: "Manrope", sans-serif; 
   background: transparent;
 
   color: #d44b3f;

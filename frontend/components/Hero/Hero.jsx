@@ -20,32 +20,36 @@ const HERO_CARDS = [
   {
     id: "budget",
     className: "budget-card",
-    icon: Banknote,
-    title: "Budget-Based Meals",
-    description: "Tell us your budget, and we'll find meals that fit.",
+    // icon: Banknote,
+    // title: "Budget-Based Meals",
+    // description: "Tell us your budget, and we'll find meals that fit.",
+    img: "/her1.png",
   },
   {
     id: "nutrition",
     className: "nutrition-card",
-    icon: Beef,
-    title: "Your Nutrition Goal",
-    description: "Choose what you need — protein, calories, or balanced meals.",
+    // icon: Beef,
+    // title: "Your Nutrition Goal",
+    // description: "Choose what you need — protein, calories, or balanced meals.",
+    img: "/hero2.png",
   },
   {
     id: "craving",
     className: "craving-card",
     icon: CakeSlice,
-    title: "Craving Something?",
-    description:
-      "Sweet, spicy, healthy, or comforting — tell Savora what you're craving.",
+    // title: "Craving Something?",
+    // description:
+    //   "Sweet, spicy, healthy, or comforting — tell Savora what you're craving.",
+    img: "/hero3.png",
   },
   {
     id: "pantry",
     className: "pantry-card",
-    icon: CookingPot,
-    title: "Cook With What You Have",
-    description:
-      "Add your available ingredients and discover what you can make.",
+    // icon: CookingPot,
+    // title: "Cook With What You Have",
+    // description:
+    //   "Add your available ingredients and discover what you can make.",
+    img: "/her4.png",
   },
 ];
 
@@ -116,7 +120,7 @@ export default function Hero() {
         {/* Main Hero Image */}
         <div className="hero-main-image">
           <Image
-            src="/hero-img.png"
+            src="/hero-main.png"
             alt="Savora AI meal planner"
             fill
             priority
@@ -126,22 +130,17 @@ export default function Hero() {
 
         {/* Floating Cards */}
         <div className="hero-cards">
-          {HERO_CARDS.map((card) => {
-            const Icon = card.icon;
-
-            return (
-              <article key={card.id} className={`hero-card ${card.className}`}>
-                <div className="hero-card-icon">
-                  <Icon size={17} strokeWidth={2.2} />
-                </div>
-
-                <div className="hero-card-content">
-                  <h2>{card.title}</h2>
-                  <p>{card.description}</p>
-                </div>
-              </article>
-            );
-          })}
+          {HERO_CARDS.map((card) => (
+            <article key={card.id} className={`hero-card ${card.className}`}>
+              <Image
+                src={card.img}
+                alt=""
+                fill
+                sizes="300px"
+                className="hero-card-image"
+              />
+            </article>
+          ))}
         </div>
       </div>
     </section>
