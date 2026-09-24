@@ -797,6 +797,7 @@ font-family: "Manrope", sans-serif;
   }
 
   .messages-container {
+    padding-top: 60px;
     padding-left: 5%;
     padding-right: 5%;
   }
@@ -811,5 +812,22 @@ font-family: "Manrope", sans-serif;
 
   .home-content h1 {
     font-size: 25px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .message-row.assistant {
+    justify-content: flex-start;
+  }
+
+  .message-row.assistant .message-content {
+    max-width: 100%;
+    width: 100%;
+
+    padding-inline: 16px;
+
+    border-radius: 14px 14px 14px 3px;
   }
 }

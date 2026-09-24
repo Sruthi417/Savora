@@ -651,6 +651,7 @@ background: #e35c1e;
 
   .budget-card {
     width: 215px;
+    height: 130px;
 
     left: 4%;
 
@@ -659,6 +660,7 @@ background: #e35c1e;
 
   .nutrition-card {
     width: 230px;
+    height: 160px;
 
     right: 4%;
 
@@ -667,6 +669,7 @@ background: #e35c1e;
 
   .craving-card {
     width: 230px;
+    height: 135px;
 
     left: 7%;
 
@@ -675,6 +678,7 @@ background: #e35c1e;
 
   .pantry-card {
     width: 215px;
+    height: 120px;
 
     right: 7%;
 
@@ -701,6 +705,48 @@ background: #e35c1e;
 
   .hero-ring-three {
     width: 880px;
+  }
+}
+
+/* =====================================================
+   SMALL LAPTOP / LARGE TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+  .budget-card {
+    width: 190px;
+    height: 114px;
+
+    left: 3%;
+
+    top: 22%;
+  }
+
+  .nutrition-card {
+    width: 195px;
+    height: 136px;
+
+    right: 3%;
+
+    top: 12%;
+  }
+
+  .craving-card {
+    width: 195px;
+    height: 115px;
+
+    left: 5%;
+
+    bottom: 16%;
+  }
+
+  .pantry-card {
+    width: 180px;
+    height: 101px;
+
+    right: 5%;
+
+    bottom: 19%;
   }
 }
 
@@ -865,7 +911,8 @@ background: #e35c1e;
   ============================================= */
 
   .budget-card {
-    width: 150px;
+    width: 130px;
+    height: 78px;
 
     left: 3px;
 
@@ -875,7 +922,8 @@ background: #e35c1e;
   }
 
   .nutrition-card {
-    width: 160px;
+    width: 135px;
+    height: 94px;
 
     right: 2px;
 
@@ -885,7 +933,8 @@ background: #e35c1e;
   }
 
   .craving-card {
-    width: 160px;
+    width: 135px;
+    height: 79px;
 
     left: 3px;
 
@@ -899,7 +948,8 @@ background: #e35c1e;
   }
 
   .pantry-card {
-    width: 150px;
+    width: 125px;
+    height: 70px;
 
     right: 2px;
 
@@ -958,21 +1008,25 @@ background: #e35c1e;
   }
 
   .budget-card {
-    width: 135px;
+    width: 100px;
+    height: 60px;
   }
 
   .nutrition-card {
-    width: 145px;
+    width: 105px;
+    height: 73px;
   }
 
   .craving-card {
-    width: 145px;
+    width: 105px;
+    height: 62px;
 
     bottom: 17%;
   }
 
   .pantry-card {
-    width: 135px;
+    width: 95px;
+    height: 53px;
 
     bottom: 20%;
   }

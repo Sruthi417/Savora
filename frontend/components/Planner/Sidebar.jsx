@@ -25,7 +25,7 @@ import { logoutUser } from "@/api/auth.api";
 import "./Sidebar.scss";
 
 const Sidebar = forwardRef(function Sidebar(
-  { onConversationSelect, activeConversationId },
+  { onConversationSelect, activeConversationId, open = true },
   ref
 ) {
   const [conversations, setConversations] = useState([]);
@@ -161,7 +161,7 @@ const Sidebar = forwardRef(function Sidebar(
     user?.name?.charAt(0)?.toUpperCase() || "S";
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${open ? "open" : "closed"}`}>
 
       {/* =========================
           TOP

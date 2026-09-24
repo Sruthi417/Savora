@@ -1,13 +1,16 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { PanelLeft } from "lucide-react";
 
 import { useAuth } from "@/hooks/useAuth";
 import { loginWithGoogle } from "@/api/auth.api";
 
 import Sidebar from "./Sidebar";
 import MainSection from "./MainSection";
+
+const MOBILE_BREAKPOINT = "(max-width: 800px)";
 
 export default function PlannerView({
   conversationId = null,
@@ -17,6 +20,33 @@ export default function PlannerView({
   const sidebarRef = useRef(null);
 
   const { loading, isAuthenticated } = useAuth();
+
+  const [isMobile, setIsMobile] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
+
+  // Below 800px the sidebar starts closed and behaves as an
+  // overlay; above it, it's always open and part of the layout.
+  useEffect(() => {
+    const mql = window.matchMedia(MOBILE_BREAKPOINT);
+
+    const applyMode = (matches) => {
+      setIsMobile(matches);
+      setSidebarOpen(!matches);
+    };
+
+    applyMode(mql.matches);
+
+    const handleChange = (e) => applyMode(e.matches);
+
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
+  }, []);
+
+  const closeSidebarOnMobile = () => {
+    if (isMobile) {
+      setSidebarOpen(false);
+    }
+  };
 
   // Only authenticated users may be here — send anyone else
   // through Google login first.
@@ -35,6 +65,8 @@ export default function PlannerView({
         ? `/planner/${newConversationId}`
         : "/planner"
     );
+
+    closeSidebarOnMobile();
   };
 
   // --------------------------------
@@ -53,6 +85,7 @@ export default function PlannerView({
   // --------------------------------
   const handleNavigateToConversation = (id) => {
     router.push(`/planner/${id}`);
+    closeSidebarOnMobile();
   };
 
   // --------------------------------
@@ -77,14 +110,32 @@ export default function PlannerView({
     <main className="planner">
 
       <header className="planner-header">
+        <button
+          type="button"
+          className="sidebar-toggle"
+          onClick={() => setSidebarOpen((prev) => !prev)}
+          aria-label={sidebarOpen ? "Close sidebar" : "Open sidebar"}
+          aria-expanded={sidebarOpen}
+        >
+          <PanelLeft size={18} />
+        </button>
+
         <div className="brand">
           <span className="brand-name">Savora</span>
           <span className="brand-assistant">AI Assistant</span>
         </div>
       </header>
 
+      {isMobile && (
+        <div
+          className={`sidebar-backdrop ${sidebarOpen ? "visible" : ""}`}
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       <Sidebar
         ref={sidebarRef}
+        open={sidebarOpen}
         activeConversationId={conversationId}
         onConversationSelect={handleConversationSelect}
       />

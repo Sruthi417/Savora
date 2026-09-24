@@ -94,6 +94,69 @@
   color: #555;
 }
 
+
+/* =========================
+   SIDEBAR TOGGLE
+========================= */
+
+// Hidden by default — the sidebar is always visible above 800px.
+.sidebar-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  width: 34px;
+  height: 34px;
+
+  margin-right: 10px;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+  color: #333;
+
+  cursor: pointer;
+
+  pointer-events: auto;
+
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+}
+
+.sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 55;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.3s ease;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 800px) {
+  .planner-header {
+    // Stay above the sidebar/backdrop while the sidebar is open.
+    z-index: 70;
+  }
+
+  .sidebar-toggle {
+    display: flex;
+  }
+}
+
 .planner__main {
   flex: 1;
 
