@@ -4,8 +4,3 @@ import api from "./axios";
 export const getUserProfile = () => {
   return api.get("/user/me");
 };
-
-// Logout user
-export const logoutUser = () => {
-  return api.post("/auth/logout");
-};

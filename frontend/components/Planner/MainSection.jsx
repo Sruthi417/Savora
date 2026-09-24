@@ -12,6 +12,7 @@ import {
 
 import {
   getConversation,
+  createConversation,
 } from "../../api/conversation.api";
 
 import {
@@ -26,12 +27,15 @@ import "./MainSection.scss";
 
 export default function MainSection({
   conversationId,
+  initialPrompt = "",
   onTitleGenerated,
+  onConversationCreated,
+  onNavigateToConversation,
 }) {
   const [conversation, setConversation] = useState(null);
   const [messages, setMessages] = useState([]);
 
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(initialPrompt);
   const [loadingConversation, setLoadingConversation] = useState(false);
   const [sending, setSending] = useState(false);
 
@@ -89,31 +93,53 @@ export default function MainSection({
   const handleSendMessage = async () => {
     const trimmedMessage = input.trim();
 
-    if (!trimmedMessage || !conversationId || sending) {
+    if (!trimmedMessage || sending) {
       return;
     }
 
-    // Show user's message immediately
-    const userMessage = {
-      role: "user",
-      content: trimmedMessage,
-    };
+    const startingFreshChat = !conversationId;
+    let targetConversationId = conversationId;
 
-    setMessages((prev) => [...prev, userMessage]);
-    setInput("");
     setSending(true);
 
     try {
+      if (startingFreshChat) {
+        // No conversation yet — e.g. a prompt typed on the homepage
+        // or on the empty planner state. Create one first, same as
+        // the sidebar's "New Chat" button.
+        const createResponse = await createConversation();
+
+        targetConversationId = createResponse.data.conversation._id;
+
+        // Show it in the sidebar right away, before the AI even replies.
+        onConversationCreated?.(createResponse.data.conversation);
+      } else {
+        // Show user's message immediately
+        setMessages((prev) => [
+          ...prev,
+          { role: "user", content: trimmedMessage },
+        ]);
+      }
+
+      setInput("");
+
       // Get user's location
       const location = await getUserLocation();
 
       // Send message + location to backend
       const response = await sendMessage({
-        conversationId,
+        conversationId: targetConversationId,
         message: trimmedMessage,
         latitude: location?.latitude,
         longitude: location?.longitude,
       });
+
+      if (startingFreshChat) {
+        // Hand off to the parent to move to /planner/<id>. That fresh
+        // mount fetches the conversation and renders the full exchange.
+        onNavigateToConversation?.(targetConversationId);
+        return;
+      }
 
       // Backend returns Gemini's answer
       const aiMessage = {
@@ -138,15 +164,21 @@ export default function MainSection({
     } catch (error) {
       console.error("Failed to send message:", error);
 
-      // Show error as assistant message
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: "assistant",
-          content:
-            "Sorry, I couldn't process that right now. Please try again.",
-        },
-      ]);
+      if (startingFreshChat) {
+        // Nothing rendered yet to show an inline error in — restore
+        // what the user typed so they can retry.
+        setInput(trimmedMessage);
+      } else {
+        // Show error as assistant message
+        setMessages((prev) => [
+          ...prev,
+          {
+            role: "assistant",
+            content:
+              "Sorry, I couldn't process that right now. Please try again.",
+          },
+        ]);
+      }
     } finally {
       setSending(false);
     }
@@ -217,7 +249,7 @@ export default function MainSection({
                 <button
                   className="send-button"
                   onClick={handleSendMessage}
-                  disabled={!input.trim()}
+                  disabled={!input.trim() || sending}
                 >
                   <Send size={15} />
                 </button>

@@ -19,10 +19,8 @@ import {
   createConversation,
 } from "../../api/conversation.api";
 
-import {
-  getUserProfile,
-  logoutUser,
-} from "@/api/user.api";
+import { getUserProfile } from "@/api/user.api";
+import { logoutUser } from "@/api/auth.api";
 
 import "./Sidebar.scss";
 
@@ -53,6 +51,15 @@ const Sidebar = forwardRef(function Sidebar(
             : conversation
         )
       );
+    },
+    addConversation(conversation) {
+      setConversations((prev) => {
+        if (prev.some((c) => c._id === conversation._id)) {
+          return prev;
+        }
+
+        return [conversation, ...prev];
+      });
     },
   }));
 

@@ -25,8 +25,14 @@ const googleClient = new OAuth2Client({
 // ==========================
 
 export const googleLogin = (req, res) => {
+  const { state } = req.query;
+
   const authorizationUrl = googleClient.generateAuthUrl({
     scope: ["openid", "email", "profile"],
+    // Round-tripped back to us in the callback so we can send the
+    // user back to whatever they were doing before signing in
+    // (e.g. a prompt typed on the homepage).
+    ...(state ? { state } : {}),
   });
 
   res.redirect(authorizationUrl);
@@ -39,7 +45,7 @@ export const googleLogin = (req, res) => {
 
 export const googleCallback = async (req, res, next) => {
   try {
-    const { code } = req.query;
+    const { code, state } = req.query;
 
     if (!code) {
       return res.status(400).json({
@@ -95,8 +101,13 @@ export const googleCallback = async (req, res, next) => {
     });
 
 
-    // Redirect user to planner
-    res.redirect(`${CLIENT_URL}/planner`);
+    // Redirect user to planner, restoring any prompt typed
+    // pre-login (carried through Google's `state` param).
+    const redirectUrl = state
+      ? `${CLIENT_URL}/planner?prompt=${encodeURIComponent(state)}`
+      : `${CLIENT_URL}/planner`;
+
+    res.redirect(redirectUrl);
 
   } catch (error) {
     next(error);

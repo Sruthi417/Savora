@@ -574,9 +574,9 @@ background: #e35c1e;
     height: 150px;
   left: calc(50% - 480px);
 
-  top: 25%;
+  top: 1%;
 
-  transform: rotate(-9deg);
+  transform: rotate(-15deg);
 }
 
 /* =====================================================
@@ -586,11 +586,11 @@ background: #e35c1e;
 .nutrition-card {
   width: 250px;
   height: 175px;
-  right: calc(50% - 520px);
+  right: calc(50% - 500px);
 
-  top: 20%;
+  top: 5%;
 
-  transform: rotate(13deg);
+  transform: rotate(-13deg);
 }
 
 /* =====================================================
@@ -599,7 +599,7 @@ background: #e35c1e;
 
 .craving-card {
   width: 255px;
-  height: 135px;
+  height: 150px;
   left: calc(50% - 460px);
 
   /*
@@ -626,7 +626,7 @@ background: #e35c1e;
 
   bottom: 15%;
 
-  transform: rotate(-5deg);
+  transform: rotate(-10deg);
 }
 
 /* =====================================================

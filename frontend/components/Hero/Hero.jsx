@@ -14,6 +14,9 @@ import {
   Sparkles,
 } from "lucide-react";
 
+import { useAuth } from "@/hooks/useAuth";
+import { loginWithGoogle } from "@/api/auth.api";
+
 import "./Hero.scss";
 
 const HERO_CARDS = [
@@ -26,21 +29,22 @@ const HERO_CARDS = [
     img: "/her1.png",
   },
   {
+    id: "craving",
+    className: "craving-card",
+    // icon: CakeSlice,
+    // title: "Craving Something?",
+    // description:
+    //   "Sweet, spicy, healthy, or comforting — tell Savora what you're craving.",
+    img: "/hero3.png",
+  },
+  {
     id: "nutrition",
     className: "nutrition-card",
     // icon: Beef,
     // title: "Your Nutrition Goal",
     // description: "Choose what you need — protein, calories, or balanced meals.",
     img: "/hero2.png",
-  },
-  {
-    id: "craving",
-    className: "craving-card",
-    icon: CakeSlice,
-    // title: "Craving Something?",
-    // description:
-    //   "Sweet, spicy, healthy, or comforting — tell Savora what you're craving.",
-    img: "/hero3.png",
+    
   },
   {
     id: "pantry",
@@ -49,12 +53,13 @@ const HERO_CARDS = [
     // title: "Cook With What You Have",
     // description:
     //   "Add your available ingredients and discover what you can make.",
-    img: "/her4.png",
+    img: "/hero4.png",
   },
 ];
 
 export default function Hero() {
   const router = useRouter();
+  const { isAuthenticated } = useAuth();
   const [question, setQuestion] = useState("");
 
   const handleSubmit = (e) => {
@@ -64,7 +69,11 @@ export default function Hero() {
 
     if (!trimmedQuestion) return;
 
-    router.push(`/planner?prompt=${encodeURIComponent(trimmedQuestion)}`);
+    if (isAuthenticated) {
+      router.push(`/planner?prompt=${encodeURIComponent(trimmedQuestion)}`);
+    } else {
+      loginWithGoogle(trimmedQuestion);
+    }
   };
   return (
     <section className="hero">
