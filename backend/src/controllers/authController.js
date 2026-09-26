@@ -8,8 +8,24 @@ import {
   GOOGLE_CLIENT_SECRET,
   GOOGLE_CALLBACK_URL,
   CLIENT_URL,
-  NODE_ENV,
 } from "../config/env.js";
+
+// Frontend and backend live on different domains (Vercel / Render),
+// so this cookie is always cross-site — browsers only send
+// cross-site cookies when they're `Secure; SameSite=None`. This is
+// deliberately NOT gated on NODE_ENV: Render doesn't set that env
+// var automatically, so it was silently falling back to
+// `secure:false; sameSite:"lax"`, which browsers never send on a
+// cross-site fetch — every post-login `/user/me` call 401'd, and
+// the app treated that as "not logged in" and looped back into
+// Google's login flow again. `Secure` cookies still work fine on
+// `http://localhost` in every modern browser (localhost is treated
+// as a trustworthy origin), so this is safe in local dev too.
+const AUTH_COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+};
 
 
 // Google OAuth client
@@ -94,9 +110,7 @@ export const googleCallback = async (req, res, next) => {
 
     // Store JWT in HttpOnly cookie
     res.cookie("token", token, {
-      httpOnly: true,
-      secure: NODE_ENV === "production",
-      sameSite: NODE_ENV === "production" ? "none" : "lax",
+      ...AUTH_COOKIE_OPTIONS,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -120,11 +134,7 @@ export const googleCallback = async (req, res, next) => {
 // ==========================
 
 export const logout = (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: NODE_ENV === "production",
-    sameSite: NODE_ENV === "production" ? "none" : "lax",
-  });
+  res.clearCookie("token", AUTH_COOKIE_OPTIONS);
 
   res.status(200).json({
     message: "Logged out successfully",
