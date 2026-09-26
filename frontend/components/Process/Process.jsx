@@ -139,7 +139,7 @@ const StepContent = ({ step }) => {
     >
 
       {/* Step icon */}
-      <div className="fs-icon">
+      <div className="fs-icon" id="process">
         <Icon
           size={22}
           strokeWidth={2}
@@ -218,7 +218,7 @@ export default function Process() {
   return (
     <section
       className="fs-section"
-      id="get-started"
+      id="process"
     >
 
       {/* ---------- Header ---------- */}

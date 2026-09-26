@@ -40,6 +40,7 @@ export default function Navbar() {
 
         {/* Center Navigation */}
         <nav className="navbar-links">
+          <Link href="/">Home</Link>
           <Link href="#features">Features</Link>
           <Link href="#process">Process</Link>
           <Link href="#faq">FAQ</Link>

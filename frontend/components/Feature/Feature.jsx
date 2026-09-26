@@ -108,9 +108,9 @@ const FeatureCard = ({ card, index }) => {
 };
 
 
-const Services = () => {
+const Features = () => {
   return (
-    <section className="pp-sec" id="services">
+    <section className="pp-sec" id="features">
 
       <div className="pp-wrap">
 
@@ -179,4 +179,4 @@ const Services = () => {
 };
 
 
-export default Services;
+export default Features;
