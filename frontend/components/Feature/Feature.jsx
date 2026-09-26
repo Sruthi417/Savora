@@ -138,7 +138,8 @@ const Services = () => {
             className="pp-title"
             variants={item}
           >
-            Food Planning Made Simple
+            Food Planning
+            <span>Made Simple</span>
           </motion.h2>
 
 
@@ -146,9 +147,14 @@ const Services = () => {
             className="pp-subtitle"
             variants={item}
           >
-            From the ingredients in your kitchen to your budget
-            and nutrition goals, Savora helps you figure out
-            what to eat next.
+            <span>
+              From the ingredients in your kitchen to your budget
+              and nutrition goals,
+            </span>
+            {" "}
+            <span>
+              Savora helps you figure out what to eat next.
+            </span>
           </motion.p>
 
         </motion.div>

@@ -3,7 +3,11 @@
 .pp-sec {
   width: 100%;
   background: var(--brand-light);
-  padding: 100px 40px 80px;
+  // padding-top matches Process's own top padding, since that IS
+  // the visual gap that appears between this section and Process.
+  padding-top: 120px;
+  padding-inline: 40px; // matches Process/Faq inline padding
+  padding-bottom: 80px;
   display: flex;
   justify-content: center;
   overflow: hidden;
@@ -64,14 +68,18 @@
   line-height: 1.08;
   letter-spacing: -0.04em;
   color: var(--brand-dark);
+
+  span {
+    display: block;
+  }
 }
 
 .pp-subtitle {
   margin-top: 20px;
-  max-width: 620px; // controls subtitle wrapping
+  // Wide enough that neither forced line below needs to wrap again.
+  max-width: 700px;
 
   text-align: center;
-  text-wrap: balance;
 
 font-family: "Manrope", sans-serif;
   font-size: 16px;
@@ -79,6 +87,10 @@ font-family: "Manrope", sans-serif;
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--brand-sub-txt);
+
+  span {
+    display: block;
+  }
 }
 
 /* cards row */
@@ -147,9 +159,17 @@ font-family: "Manrope", sans-serif;
   color: #73737a;
   margin-bottom: 8px;
 }
-}
-/* ── tablet ─────────────────────────────────────────────────────── */
+
+/* ── tablet ───────────────────────────────────────────────────────
+   Nested here (not top-level) so these overrides compile to the
+   same `.pp-sec .pp-cards` specificity as the base rule above —
+   a flat top-level media rule can never beat a nested selector,
+   no matter the viewport, which was silently killing this. ──── */
 @media (max-width: 980px) {
+  // Matches Process's own padding at its equivalent tablet tier.
+  padding-top: 88px;
+  padding-inline: 32px;
+
   .pp-cards {
     gap: 18px;
     margin-top: 64px;
@@ -159,21 +179,53 @@ font-family: "Manrope", sans-serif;
   }
 }
 
-/* ── mobile ─────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .pp-sec {
-    padding: 64px 20px 72px;
-  }
+/* ── mobile: 3-column row → 1-column, 3-row stack ──────────────── */
+@media (max-width: 800px) {
+
+  padding-top: 8rem;
+  // Same inline padding as Faq/Process at their mobile tier — the
+  // card grows to fill up to this padding, not the viewport edge,
+  // so its border/rounded corners stay visible on both sides.
+  padding-inline: 20px;
+
   .pp-cards {
     grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 48px;
-    max-width: 420px;
+    gap: 32px;
+    margin-top: 40px;
   }
   .pp-card-media {
     aspect-ratio: 4 / 3;
   }
+
+  // Force the title/description to a consistent 2 lines each,
+  // regardless of how much extra width the full-bleed card now has.
+  .pp-card-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
+  }
   .pp-card-desc {
     max-width: none;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
   }
+
+  // Below ~700px, the two forced lines don't both fit on one line
+  // each anymore — fall back to natural, evenly-balanced wrapping
+  // instead of forcing an extra broken line inside a fixed span.
+  .pp-subtitle {
+    font-size: 15px;
+    text-wrap: balance;
+
+    span {
+      display: inline;
+    }
+  }
+}
 }

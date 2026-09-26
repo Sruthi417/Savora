@@ -2,11 +2,10 @@
 
 .hero {
   // --orange: #ff5200;
-   --orange: #ffffff;
+  --orange: #ffffff;
   --text: #171717;
   --muted: #666666;
 
- 
   --hero-bleed: 25px;
 
   position: relative;
@@ -43,8 +42,6 @@
 
   // #f8cdb9 100%
   // );
-
-  
 }
 
 /* =====================================================
@@ -90,7 +87,7 @@
 
   background-image: radial-gradient(
     circle,
-      rgba(239, 166, 92, 0.6) 1px,
+    rgba(239, 166, 92, 0.6) 1px,
     transparent 1px
   );
 
@@ -172,7 +169,17 @@
   font-family: "Manrope", sans-serif;
   letter-spacing: -0.055em;
 
-  span {
+  // The whole second line ("I'll figure out what to eat.") gets
+  // the highlight — a real background on the line itself, not an
+  // absolutely positioned overlay. That approach depended on the
+  // computed box of its containing element, which rendered
+  // inconsistently (clipped, or missing entirely) depending on how
+  // the text wrapped at each breakpoint. A background is part of
+  // the element's own normal rendering, so it always shows up
+  // correctly. `box-decoration-break` keeps it looking right even
+  // if this line itself wraps into more than one line (mobile).
+  span,
+  .hero-title-highlight {
     position: relative;
 
     display: block;
@@ -184,30 +191,23 @@
     margin: 0 auto;
 
     z-index: 1;
+  }
 
-    // Orange line
-    &::after {
-      content: "";
+  .hero-title-highlight {
+    padding: 0 6px;
 
-      position: absolute;
+    background-image: linear-gradient(
+      rgba(250, 130, 10, 0.4),
+      rgba(250, 130, 10, 0.4)
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 42%;
+    background-position: 0 100%;
 
-      left: 0;
-      right: 0;
+    border-radius: 4px;
 
-      top: 58%;
-
-      height: 30px;
-
-      background: rgba(250, 130, 10, 0.40);
-
-      border-radius: 2px;
-
-      transform: rotate(-1deg);
-
-      z-index: -1;
-
-      pointer-events: none;
-    }
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
   }
 }
 
@@ -313,7 +313,7 @@
 
   background: var(--orange);
   color: #ffffff;
-background: #e35c1e;
+  background: #e35c1e;
   cursor: pointer;
 
   transition:
@@ -492,6 +492,10 @@ background: #e35c1e;
 .hero-card {
   position: absolute;
 
+  // Explicit stacking order — without this, an auto z-index here
+  // loses to .hero-main-image's z-index: 3 and paints behind it.
+  z-index: 4;
+
   display: block;
 
   padding: 0;
@@ -571,7 +575,7 @@ background: #e35c1e;
 
 .budget-card {
   width: 250px;
-    height: 150px;
+  height: 125px;
   left: calc(50% - 480px);
 
   top: 1%;
@@ -585,7 +589,7 @@ background: #e35c1e;
 
 .nutrition-card {
   width: 250px;
-  height: 175px;
+  height: 125px;
   right: calc(50% - 500px);
 
   top: 5%;
@@ -599,7 +603,7 @@ background: #e35c1e;
 
 .craving-card {
   width: 255px;
-  height: 150px;
+  height: 125px;
   left: calc(50% - 460px);
 
   /*
@@ -617,7 +621,7 @@ background: #e35c1e;
 
 .pantry-card {
   width: 240px;
-  height: 135px;
+  height: 125px;
   right: calc(50% - 450px);
 
   /*
@@ -631,103 +635,39 @@ background: #e35c1e;
 
 /* =====================================================
    TABLET
+
+   Card positions switch from the desktop's fixed
+   `calc(50% - Npx)` offsets to percentages — those fixed
+   offsets push the cards off-screen (and get clipped by
+   `overflow-x: hidden` on .hero) below ~1000px wide.
 ===================================================== */
 
 @media (max-width: 1100px) {
   .hero-content {
-    padding-top: 85px;
-  }
-
-  .hero-title {
-    font-size: clamp(42px, 6vw, 64px);
+    padding-top: 64px;
+    margin-top: 2.5rem;
   }
 
   .hero-main-image {
-    width: 350px;
-    height: 350px;
+    width: 340px;
+    height: 340px;
 
-    margin-bottom: 20px;
+    bottom: 24px;
   }
 
-  .budget-card {
-    width: 215px;
-    height: 130px;
-
-    left: 4%;
-
-    top: 24%;
-  }
-
-  .nutrition-card {
-    width: 230px;
-    height: 160px;
-
-    right: 4%;
-
-    top: 14%;
-  }
-
-  .craving-card {
-    width: 230px;
-    height: 135px;
-
-    left: 7%;
-
-    bottom: 15%;
-  }
-
-  .pantry-card {
-    width: 215px;
-    height: 120px;
-
-    right: 7%;
-
-    bottom: 18%;
-  }
-
-  .hero-card-content {
-    h2 {
-      font-size: 10px;
-    }
-
-    p {
-      font-size: 8px;
-    }
-  }
-
-  .hero-ring-one {
-    width: 500px;
-  }
-
-  .hero-ring-two {
-    width: 700px;
-  }
-
-  .hero-ring-three {
-    width: 880px;
-  }
-}
-
-/* =====================================================
-   SMALL LAPTOP / LARGE TABLET
-===================================================== */
-
-@media (max-width: 900px) {
   .budget-card {
     width: 190px;
     height: 114px;
 
-    left: 3%;
-
-    top: 22%;
+    left: 2%;
+    top: 8%;
   }
 
   .nutrition-card {
     width: 195px;
     height: 136px;
 
-    right: 3%;
-
+    right: 2%;
     top: 12%;
   }
 
@@ -735,8 +675,7 @@ background: #e35c1e;
     width: 195px;
     height: 115px;
 
-    left: 5%;
-
+    left: 4%;
     bottom: 16%;
   }
 
@@ -744,9 +683,8 @@ background: #e35c1e;
     width: 180px;
     height: 101px;
 
-    right: 5%;
-
-    bottom: 19%;
+    right: 4%;
+    bottom: 16%;
   }
 }
 
@@ -754,290 +692,144 @@ background: #e35c1e;
    MOBILE
 ===================================================== */
 
-@media (max-width: 650px) {
+@media (max-width: 800px) {
   .hero {
-    min-height: 600px;
-
-    /* Ring bleed is smaller on mobile (see .hero-ring-three below). */
-    --hero-bleed: 220px;
-
-    /*
-     * 70% orange treatment on mobile too.
-     */
-
-    background: linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #ffffff 30%,
-
-      #fffefd 37%,
-      #fffaf7 44%,
-
-      #fff4ee 51%,
-      #ffede5 59%,
-
-      #ffe7dc 68%,
-      #ffe0d2 77%,
-
-      #ffd9c9 88%,
-      #ffd2be 100%
-    );
-  }
-
-  .hero::before {
-    top: 28%;
-
-    background: linear-gradient(
-      180deg,
-      rgba(255, 82, 0, 0) 25%,
-      rgba(255, 82, 0, 0.02) 38%,
-      rgba(255, 82, 0, 0.045) 50%,
-      rgba(255, 82, 0, 0.075) 65%,
-      rgba(255, 82, 0, 0.12) 82%,
-      rgba(255, 82, 0, 0.16) 100%
-    );
+    // Matches .hero-main-image's `bottom` offset below, plus a
+    // buffer, so it never gets clipped by .hero's own box.
+    --hero-bleed: 32px;
+    padding-top: 5rem;
   }
 
   .hero-content {
-    width: calc(100% - 30px);
-
-    padding-top: 72px;
+    padding-top: 48px;
+    margin-top: 1.5rem;
   }
-
-  .hero-eyebrow {
-    padding: 6px 10px 6px 8px;
-
-    font-size: 9px;
-  }
-
-  .hero-title {
-    margin-top: 16px;
-
-    font-size: clamp(37px, 10.5vw, 48px);
-
-    line-height: 1;
-  }
-
-  .hero-description {
-    max-width: 330px;
-
-    margin-top: 17px;
-
-    font-size: 12px;
-  }
-
-  .hero-button {
-    margin-top: 21px;
-  }
-
-  /* =============================================
-     IMAGE
-  ============================================= */
 
   .hero-main-image {
-    width: 245px;
-    height: 245px;
+    width: 260px;
+    height: 260px;
 
-    margin-bottom: 20px;
+    bottom: 18px;
   }
 
-  /* =============================================
-     RINGS
-  ============================================= */
-
-  .hero-ring-one {
-    width: 370px;
-    height: 220px;
-
-    bottom: -90px;
-  }
-
-  .hero-ring-two {
-    width: 520px;
-    height: 300px;
-
-    bottom: -135px;
-  }
-
-  .hero-ring-three {
-    width: 680px;
-    height: 390px;
-
-    bottom: -185px;
-  }
-
-  /* =============================================
-     CARDS
-  ============================================= */
-
-  .hero-card {
-    padding: 9px;
-
-    gap: 7px;
-
-    border-radius: 12px;
-  }
-
-  .hero-card-icon {
-    width: 26px;
-    height: 26px;
-
-    border-radius: 7px;
-
-    svg {
-      width: 13px;
-      height: 13px;
-    }
-  }
-
-  .hero-card-content {
-    h2 {
-      font-size: 8px;
-    }
-
-    p {
-      max-width: 130px;
-
-      margin-top: 3px;
-
-      font-size: 6px;
-
-      line-height: 1.35;
-    }
-  }
-
-  /* =============================================
-     MOBILE CARD POSITIONS
-  ============================================= */
-
+  // Pulled further down (higher top% / more inset) than the
+  // tablet tier so they sit beside the dish, not above it, now
+  // that the main image itself has shrunk.
   .budget-card {
     width: 130px;
     height: 78px;
 
-    left: 3px;
-
-    top: 22%;
-
-    transform: rotate(-8deg);
+    left: 2%;
+    top: 12%;
   }
 
   .nutrition-card {
     width: 135px;
     height: 94px;
 
-    right: 2px;
-
-    top: 10%;
-
-    transform: rotate(7deg);
+    right: 2%;
+    top: 16%;
   }
 
   .craving-card {
     width: 135px;
     height: 79px;
 
-    left: 3px;
-
-    /*
-     * Orange space below.
-     */
-
-    bottom: 17%;
-
-    transform: rotate(6deg);
+    left: 4%;
+    bottom: 14%;
   }
 
   .pantry-card {
     width: 125px;
     height: 70px;
 
-    right: 2px;
+    right: 4%;
+    bottom: 14%;
+  }
+}
 
-    /*
-     * Orange space below.
-     */
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
 
-    bottom: 20%;
+@media (max-width: 520px) {
+  .hero {
+    --hero-bleed: 26px;
+    padding-top: 5rem;
+  }
 
-    transform: rotate(-7deg);
+  .hero-content {
+    padding-top: 36px;
+    margin-top: 1rem;
+  }
+
+  .hero-main-image {
+    width: 200px;
+    height: 200px;
+
+    bottom: 14px;
+  }
+
+  .budget-card {
+    width: 95px;
+    height: 57px;
+
+    left: 2%;
+    top: 14%;
+  }
+
+  .nutrition-card {
+    width: 100px;
+    height: 70px;
+
+    right: 2%;
+    top: 18%;
+  }
+
+  .craving-card {
+    width: 100px;
+    height: 59px;
+
+    left: 3%;
+    bottom: 12%;
+  }
+
+  .pantry-card {
+    width: 92px;
+    height: 52px;
+
+    right: 3%;
+    bottom: 12%;
   }
 }
 
 /* =====================================================
    VERY SMALL MOBILE
+
+   No room left for the floating cards — drop them and
+   let the dish image take up the freed-up space instead.
 ===================================================== */
 
-@media (max-width: 400px) {
-  .hero-content {
-    width: calc(100% - 24px);
-
-    padding-top: 65px;
-  }
-
-  .hero-title {
-    font-size: 36px;
-  }
-
-  .hero-description {
-    max-width: 300px;
-
-    font-size: 11px;
+@media (max-width: 420px) {
+  .hero-cards {
+    display: none;
   }
 
   .hero-main-image {
-    width: 215px;
-    height: 215px;
+    width: 230px;
+    height: 230px;
 
-    margin-bottom: 18px;
+    bottom: 14px;
   }
 
-  .hero-ring-one {
-    width: 340px;
-  }
+  .hero-title {
+   
+    font-size: clamp(32px, 10vw, 40px);
 
-  .hero-ring-two {
-    width: 480px;
-  }
+    text-wrap: balance;
 
-  .hero-ring-three {
-    width: 620px;
-  }
-
-  .hero-card {
-    padding: 8px;
-  }
-
-  .budget-card {
-    width: 100px;
-    height: 60px;
-  }
-
-  .nutrition-card {
-    width: 105px;
-    height: 73px;
-  }
-
-  .craving-card {
-    width: 105px;
-    height: 62px;
-
-    bottom: 17%;
-  }
-
-  .pantry-card {
-    width: 95px;
-    height: 53px;
-
-    bottom: 20%;
-  }
-
-  .hero-card-content {
-    h2 {
-      font-size: 7.5px;
-    }
-
-    p {
-      font-size: 5.7px;
+    span {
+      display: inline;
     }
   }
 }
