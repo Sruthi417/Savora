@@ -58,14 +58,14 @@
 .footer-newsletter-image {
   position: relative;
 
-  height: 260px;
+  height: 300px;
 
   overflow: hidden;
 }
 
 
 .footer-food-image {
-  object-fit: cover;
+  object-fit: contain;
 
   object-position: center;
 }

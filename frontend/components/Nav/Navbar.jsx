@@ -52,7 +52,7 @@ export default function Navbar() {
           className="planner-btn"
           onClick={handlePlannerClick}
         >
-          Planner
+     Get Started
         </Link>
 
       </div>
